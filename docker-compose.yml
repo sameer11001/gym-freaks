@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  gymfreaks:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/gym_freaks
+      SPRING_DATASOURCE_USERNAME: tiger
+      SPRING_DATASOURCE_PASSWORD: sa20200219
+
+    networks:
+      - my-bridge-network
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: gym_freaks
+      MYSQL_USER: tiger
+      MYSQL_PASSWORD: sa20200219
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-bridge-network
+
+networks:
+  my-bridge-network:
+    driver: bridge
+
+volumes:
+  mysql-data: # Define volume for MySQL data

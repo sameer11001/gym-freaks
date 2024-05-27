@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: gymfreaks
+  devtools:
+    add-properties: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        generate_statistics: true
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://host.docker.internal:3306/gym_freaks
+    username: tiger
+    password: sa20200219
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
+jwt:
+  secret: 17f673c2851e77089230d553276e89922f9c5af8c3797b1b8f48a287ecc35a23
+  expiration:
+    time: 36000000
+  refresher:
+    time: "60*60*24*7"
+logging:
+  level:
+    org:
+      hibernate:
+        sql: debug
+        stat: DEBUG
+      webapp:
+        gymfreaks: TRACE
+    root: "INFO  "
+  pattern:
+    console:
+      "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(18971){magenta}
+      %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint}
+      %m%n%wEx"
+springdoc:
+  api-docs:
+    path: /swagger-ui
