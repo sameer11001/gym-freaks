@@ -20,4 +20,5 @@ public class AccountUpdateDto {
     private String userImage;
     private String userGender;
     private String userDescription;
+
 }

@@ -8,7 +8,7 @@ import org.webapp.gymfreaks.auth.model.dto.request.AccountUpdateDto;
 import org.webapp.gymfreaks.auth.model.dto.user.UserViewDto;
 import org.webapp.gymfreaks.auth.service.AuthService;
 import org.webapp.gymfreaks.auth.service.RoleService;
-import org.webapp.gymfreaks.auth.utils.constants.Authorities;
+import org.webapp.gymfreaks.auth.service.UserService;
 import org.webapp.gymfreaks.core.model.dto.CustomApiResponse;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,6 +44,9 @@ public class UserController {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserService userService;
 
     public UserController(AuthService accountService) {
         this.accountService = accountService;
@@ -89,23 +92,17 @@ public class UserController {
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiResponse(responseCode = "202", description = "Update profile successfully")
-    public CustomApiResponse<AccountUpdateDto> updateUserById(@Valid @RequestBody AccountUpdateDto requestBody,
+    public CustomApiResponse<UserViewDto> updateUserById(@Valid @RequestBody AccountUpdateDto requestBody,
             @Parameter(description = "ID of employee to be update the profile", required = true) @PathVariable Long id) {
         try {
-            if (Boolean.TRUE.equals(accountService.existsById(id))) {
-                UserEntity account;
-                account = new UserEntity(id, requestBody.getUserEmail(), requestBody.getUserPassword(),
-                        requestBody.getUserFirstName(), requestBody.getUserLastName(), requestBody.getUserPhoneNumber(),
-                        requestBody.getUserImage(), requestBody.getUserGender(), requestBody.getUserDescription(),
-                        roleService.findRoleByRoleName(Authorities.USER.toString()));
-                accountService.updateById(id, account);
-                return CustomApiResponse.successOf(requestBody, "Update profile successfully");
-            } else {
-                return CustomApiResponse.errorOf(HttpStatus.NOT_FOUND, "User not found");
-            }
+            UserEntity entity = userService.findById(id);
 
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            UserEntity account = userMapper.updateDtoToEntity(requestBody, entity);
+
+            return CustomApiResponse.successOf(userMapper.toDto(userService.updateById(id, account)),
+                    "Update profile successfully");
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.toString());
         }
     }
 
