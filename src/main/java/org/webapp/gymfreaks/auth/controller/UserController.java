@@ -69,7 +69,7 @@ public class UserController {
                 UserViewDto accountDto = userMapper.toDto(account);
                 accountsDto.add(accountDto);
             }
-            return CustomApiResponse.successOf(accountsDto, "Get all profile successfully");
+            return CustomApiResponse.successOf(accountsDto, "Get all profile successfully", null);
         } catch (Exception e) {
             throw new UserNotFoundException();
         }
@@ -83,7 +83,7 @@ public class UserController {
         try {
             UserEntity account = accountService.findById(id);
             UserViewDto accountDto = userMapper.toDto(account);
-            return CustomApiResponse.successOf(accountDto, "Get profile successfully");
+            return CustomApiResponse.successOf(accountDto, "Get profile successfully", null);
         } catch (Exception e) {
             throw new UserNotFoundException();
         }
@@ -100,23 +100,23 @@ public class UserController {
             UserEntity account = userMapper.updateDtoToEntity(requestBody, entity);
 
             return CustomApiResponse.successOf(userMapper.toDto(userService.updateById(id, account)),
-                    "Update profile successfully");
+                    "Update profile successfully", HttpStatus.ACCEPTED);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.toString());
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @ApiResponse(responseCode = "202", description = "Delete profile successfully")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiResponse(responseCode = "204", description = "Delete profile successfully")
     public CustomApiResponse<Void> deleteUserById(
             @Parameter(description = "ID of employee to be delete", required = true) @PathVariable String id) {
 
         try {
             accountService.deleteById(Long.parseLong(id));
-            return CustomApiResponse.SUCCESS;
+            return CustomApiResponse.successOf(null, "Delete profile successfully", HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            return CustomApiResponse.SUCCESS; // TODO making user service
+            throw new RuntimeException();
         }
     }
 

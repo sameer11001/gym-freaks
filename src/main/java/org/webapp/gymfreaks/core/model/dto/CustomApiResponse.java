@@ -28,9 +28,10 @@ public class CustomApiResponse<T> {
             .isSuccess(true)
             .build();
 
-    public static <T> CustomApiResponse<T> successOf(final T response, final String message) {
+    public static <T> CustomApiResponse<T> successOf(final T response, final String message, HttpStatus httpStatus) {
+
         return CustomApiResponse.<T>builder()
-                .httpStatus(HttpStatus.OK.value())
+                .httpStatus(httpStatus == null ? HttpStatus.OK.value() : httpStatus.value())
                 .isSuccess(true)
                 .message(message)
                 .response(response)

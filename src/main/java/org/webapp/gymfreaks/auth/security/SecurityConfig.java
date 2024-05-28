@@ -46,10 +46,11 @@ public class SecurityConfig {
                 return new AntPathMatcher();
         }
 
+        // this is the public req can any one access
         // put it into jwt Auth filter
         Set<String> publicRequest = new HashSet<>(
                         Arrays.asList("/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/auth/refresh_token",
-                                        "/swagger-ui/**")); // we can add
+                                        "/swagger-ui/**", "/api/v1/products/**")); // we can add
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter)

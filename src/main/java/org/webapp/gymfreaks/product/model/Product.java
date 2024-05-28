@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,32 +35,31 @@ public class Product extends BaseEntity {
     @Column(name = "product_name", unique = true, nullable = false)
     private String productName;
 
-    @NotBlank
+    @NotNull
+    @Min(value = 0)
     @Column(name = "product_price", nullable = false)
     private Float productPrice;
 
-    @NotBlank
     @Column(name = "product_description", nullable = true)
     private String productDescription;
 
-    @NotBlank
     @Column(name = "product_image", nullable = true)
     private String productImage;
 
-    @NotBlank
     @Column(name = "product_thumbnail", nullable = true)
     private String productThumbnail;
 
-    @NotBlank
+    @NotNull
+    @Min(value = 0)
     @Column(name = "product_stock", nullable = false)
     private Integer productStock;
 
-    @NotBlank
+    @NotNull
     @Column(name = "product_live", nullable = false)
     private Boolean productLive;
 
     @NotBlank
     @Column(name = "product_category", nullable = false)
-    private String productCategory; // TODO: this is foreign key to product category many products to one category
+    private String productCategory;
 
 }

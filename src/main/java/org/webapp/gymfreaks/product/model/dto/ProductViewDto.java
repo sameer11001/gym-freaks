@@ -1,21 +1,20 @@
 package org.webapp.gymfreaks.product.model.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class ProductViewDto {
 
-    @NotBlank
+    private Long productId;
+
     private String productName;
 
-    @NotBlank
     private Float productPrice;
 
     private String productDescription;
@@ -27,5 +26,7 @@ public class ProductDto {
     private Integer productStock;
 
     private Boolean productLive;
+
+    private String productCategory;
 
 }

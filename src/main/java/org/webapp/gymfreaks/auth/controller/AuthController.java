@@ -69,7 +69,7 @@ public class AuthController {
             CustomLogger.debug("Login request received with email " + requestBody.getEmail());
             token = loginService.login(requestBody);
             CustomLogger.debug("Token generated " + token);
-            return CustomApiResponse.successOf(token, "Login successful");
+            return CustomApiResponse.successOf(token, "Login successful", null);
 
         } catch (BadCredentialsException e) {
             CustomLogger.error("Invalid credentials " + e.getMessage());
@@ -78,9 +78,9 @@ public class AuthController {
     }
 
     @Operation(summary = "register API", description = "register a user")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "account created successful with all account information"),
+            @ApiResponse(responseCode = "201", description = "account created successful with all account information"),
             @ApiResponse(responseCode = "400", description = "Invalid credentials with message")
     })
     @PostMapping("/register")
@@ -90,7 +90,7 @@ public class AuthController {
 
             UserViewDto accountViewDto = userMapper.toDto(account);
             CustomLogger.debug("Account created successfully with email " + account.getUserEmail());
-            return CustomApiResponse.successOf(accountViewDto, "Account created successfully");
+            return CustomApiResponse.successOf(accountViewDto, "Account created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             CustomLogger.error("Error while creating account " + e.getMessage());
             return CustomApiResponse.errorOf(HttpStatus.BAD_REQUEST, "error : " + e.getMessage());
@@ -98,9 +98,9 @@ public class AuthController {
     }
 
     @Operation(summary = "refresh token API", description = "refresh access token")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Refresh Token generated successfully with JWT token"),
+            @ApiResponse(responseCode = "201", description = "Refresh Token generated successfully with JWT token"),
             @ApiResponse(responseCode = "400", description = "Invalid credentials with message")
     })
     @PostMapping("/refresh_token")
@@ -117,7 +117,8 @@ public class AuthController {
                         .accessToken(accessToken)
                         .token(requestBody.getToken())
                         .build();
-                return CustomApiResponse.successOf(jwtResponse, "Refresh Token generated successfully");
+                return CustomApiResponse.successOf(jwtResponse, "Refresh Token generated successfully",
+                        HttpStatus.CREATED);
             } catch (Exception e) {
                 CustomLogger.error("Bad Request" + e.getMessage());
                 return CustomApiResponse.errorOf(HttpStatus.BAD_REQUEST, "Bad Request" + e.getMessage());
@@ -140,7 +141,7 @@ public class AuthController {
         try {
             refreshTokenService.deleteByToken(requestBody.getToken());
             CustomLogger.debug("Token deleted " + requestBody.getToken());
-            return CustomApiResponse.successOf("request processed", "Logout successful");
+            return CustomApiResponse.successOf("request processed", "Logout successful", null);
         } catch (TokenNotFoundException e) {
             CustomLogger.error("error while logging out : " + e.getMessage());
             return CustomApiResponse.errorOf(HttpStatus.BAD_REQUEST, "error while logging out : " + e.getMessage());

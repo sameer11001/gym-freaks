@@ -16,6 +16,8 @@ import org.webapp.gymfreaks.auth.error.AccessDeniedException;
 import org.webapp.gymfreaks.auth.error.TokenNotFoundException;
 import org.webapp.gymfreaks.auth.error.UserAlreadyExistException;
 import org.webapp.gymfreaks.auth.error.UserNotFoundException;
+import org.webapp.gymfreaks.product.error.ProductAlreadyExist;
+import org.webapp.gymfreaks.product.error.ProductNotFoundException;
 import org.springframework.validation.FieldError;
 
 @RestControllerAdvice
@@ -51,14 +53,14 @@ public class GlobalExceptionHandler {
     }
 
     // Bad Request
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(UserAlreadyExistException.class)
     protected ResponseEntity<Object> handleUserAlreadyExistException(final UserAlreadyExistException ex) {
 
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 400, errors);
-        return ResponseEntity.status(400).body(errorResponse);
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 409, errors);
+        return ResponseEntity.status(409).body(errorResponse);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -99,6 +101,28 @@ public class GlobalExceptionHandler {
         errors.add(ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 404, errors);
         return ResponseEntity.status(404).body(errorResponse);
+    }
+
+    // Not Found
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ProductNotFoundException.class)
+    protected ResponseEntity<Object> handleProductNotFoundException(final ProductNotFoundException ex) {
+
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 404, errors);
+        return ResponseEntity.status(404).body(errorResponse);
+    }
+
+    // Conflict
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(ProductAlreadyExist.class)
+    protected ResponseEntity<Object> handlProductAlreadyExistException(final ProductAlreadyExist ex) {
+
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 409, errors);
+        return ResponseEntity.status(409).body(errorResponse);
     }
 
     // Not Accepted
