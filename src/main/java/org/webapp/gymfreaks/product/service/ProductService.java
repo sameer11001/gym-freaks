@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.boot.autoconfigure.cache.CacheProperties.Redis;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.webapp.gymfreaks.core.config.CustomLogger;
 import org.webapp.gymfreaks.core.error.NullItemException;
@@ -29,10 +30,22 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
+    // @Autowired
+    // RedisCacheImpl<ProductViewDto> redisCache;
+
     public List<ProductViewDto> getAllProducts() {
         try {
-            List<Product> products = productRepository.findAll();
             List<ProductViewDto> productViewDto = new ArrayList<>();
+            // Optional<List<ProductViewDto>> productViewDtoOptional =
+            // redisCache.getList("products");
+            // if (productViewDtoOptional.isPresent()) {
+            // for (ProductViewDto product : productViewDtoOptional.get()) {
+            // productViewDto.add(product);
+            // }
+            // CustomLogger.info("Get products successfully", productViewDto.toString());
+            // return productViewDto;
+            // }
+            List<Product> products = productRepository.findAll();
             for (Product product : products) {
                 productViewDto.add(productMapper.toProductDto(product));
             }

@@ -19,8 +19,8 @@
 		<java.version>17</java.version>
 
 	</properties>
+	<!-- dependecies  -->
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -109,6 +109,8 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- spring sec -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -121,12 +123,13 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<!-- spring sec -->
+
 
 		<!-- <dependency>
 	<groupId>io.jsonwebtoken</groupId>
@@ -154,9 +157,37 @@ this is aleagacy we need to impl and api and jackson
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- redis cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+
+		</dependency>
+
+		<!-- redis cache -->
+		<!-- <dependency>
+			<groupId>com.redis.testcontainers</groupId>
+			<artifactId>testcontainers-redis-junit-jupiter</artifactId>
+			<version>1.4.6</version>
+			<scope>test</scope>
+		</dependency> -->
+
 
 	</dependencies>
-
+	<!-- end of dependencies -->
 
 	<build>
 		<plugins>

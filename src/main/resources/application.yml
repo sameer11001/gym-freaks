@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   application:
     name: gymfreaks
@@ -16,8 +18,7 @@ spring:
     username: tiger
     password: sa20200219
     driver-class-name: com.mysql.cj.jdbc.Driver
-server:
-  port: 8080
+
 jwt:
   secret: 17f673c2851e77089230d553276e89922f9c5af8c3797b1b8f48a287ecc35a23
   expiration:
@@ -41,3 +42,8 @@ logging:
 springdoc:
   api-docs:
     path: /swagger-ui
+
+redis:
+  host: 192.168.1.210
+  port: 6379
+  timeToLive: 60

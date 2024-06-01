@@ -16,6 +16,7 @@ import org.webapp.gymfreaks.auth.error.AccessDeniedException;
 import org.webapp.gymfreaks.auth.error.TokenNotFoundException;
 import org.webapp.gymfreaks.auth.error.UserAlreadyExistException;
 import org.webapp.gymfreaks.auth.error.UserNotFoundException;
+import org.webapp.gymfreaks.core.config.CustomLogger;
 import org.webapp.gymfreaks.product.error.ProductAlreadyExist;
 import org.webapp.gymfreaks.product.error.ProductNotFoundException;
 import org.springframework.validation.FieldError;
@@ -112,6 +113,15 @@ public class GlobalExceptionHandler {
         errors.add(ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 404, errors);
         return ResponseEntity.status(404).body(errorResponse);
+    }
+
+    // redis
+    @ExceptionHandler(OTPServiceException.class)
+    protected Void handleNullPointerException(final NullPointerException ex) {
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+        CustomLogger.error(errors.toString());
+        return null;
     }
 
     // Conflict
