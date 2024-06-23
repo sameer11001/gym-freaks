@@ -6,7 +6,6 @@ import org.webapp.gymfreaks.core.config.CustomLogger;
 import org.webapp.gymfreaks.core.config.Lettuce;
 import org.webapp.gymfreaks.core.model.dto.CustomApiResponse;
 import org.webapp.gymfreaks.product.model.dto.ProductViewDto;
-import org.webapp.gymfreaks.product.repository.ProductRepository;
 import org.webapp.gymfreaks.product.service.ProductService;
 
 import java.util.List;

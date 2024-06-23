@@ -185,7 +185,6 @@ this is aleagacy we need to impl and api and jackson
 			<scope>test</scope>
 		</dependency> -->
 
-
 	</dependencies>
 	<!-- end of dependencies -->
 

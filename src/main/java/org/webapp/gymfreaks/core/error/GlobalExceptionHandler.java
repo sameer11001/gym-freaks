@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
                     errors.put(fieldName, message);
                 });
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(400).body(errors);
 
     }
 
