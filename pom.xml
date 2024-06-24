@@ -177,6 +177,19 @@ this is aleagacy we need to impl and api and jackson
 
 		</dependency>
 
+		<!--for test> -->
+		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.7.3</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+		<!--end test> -->
+
 		<!-- redis cache -->
 		<!-- <dependency>
 			<groupId>com.redis.testcontainers</groupId>
