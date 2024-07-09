@@ -1,16 +1,16 @@
 package org.webapp.gymfreaks.core.error;
 
-public class NullItemException extends RuntimeException {
+public class EmptyItemsException extends RuntimeException {
 
     private static final String DEFAULT_MESSAGE = """
             Null Item Exception!
             """;
 
-    public NullItemException() {
+    public EmptyItemsException() {
         super();
     }
 
-    public NullItemException(String message) {
+    public EmptyItemsException(String message) {
         super(DEFAULT_MESSAGE + " " + message);
     }
 }

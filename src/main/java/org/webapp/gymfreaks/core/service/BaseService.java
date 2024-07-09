@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.webapp.gymfreaks.core.model.BaseEntity;
-import org.webapp.gymfreaks.core.repository.BaseRepostitory;
+import org.webapp.gymfreaks.core.repository.BaseRepository;
 
 import jakarta.persistence.MappedSuperclass;
 
@@ -12,7 +12,7 @@ import jakarta.persistence.MappedSuperclass;
 public abstract class BaseService<T extends BaseEntity, ID> {
 
     @Autowired
-    private BaseRepostitory<T, ID> baseRepostitory;
+    private BaseRepository<T, ID> baseRepostitory;
 
     public T findById(ID id) {
         return baseRepostitory.findById(id).orElseThrow();

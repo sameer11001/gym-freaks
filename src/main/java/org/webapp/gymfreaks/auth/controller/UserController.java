@@ -9,6 +9,7 @@ import org.webapp.gymfreaks.auth.model.dto.user.UserViewDto;
 import org.webapp.gymfreaks.auth.service.AuthService;
 import org.webapp.gymfreaks.auth.service.RoleService;
 import org.webapp.gymfreaks.auth.service.UserService;
+import org.webapp.gymfreaks.core.error.RunTimeException;
 import org.webapp.gymfreaks.core.model.dto.CustomApiResponse;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -102,7 +103,7 @@ public class UserController {
             return CustomApiResponse.successOf(userMapper.toDto(userService.updateById(id, account)),
                     "Update profile successfully", HttpStatus.ACCEPTED);
         } catch (RuntimeException e) {
-            throw new RuntimeException(e.toString());
+            throw new RunTimeException(e.toString());
         }
     }
 
@@ -110,13 +111,13 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponse(responseCode = "204", description = "Delete profile successfully")
     public CustomApiResponse<Void> deleteUserById(
-            @Parameter(description = "ID of employee to be delete", required = true) @PathVariable String id) {
+            @Parameter(description = "ID of employee to be delete", required = true) @PathVariable String id) throws RuntimeException {
 
         try {
             accountService.deleteById(Long.parseLong(id));
             return CustomApiResponse.successOf(null, "Delete profile successfully", HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RunTimeException(e.toString());
         }
     }
 

@@ -17,6 +17,12 @@ public interface UserMapper {
 
     UserViewDto toDto(UserEntity account);
 
+
+    /**
+     * @param  accountUpdateDto
+     * @param  account
+     * @return this for update an entity in database and ignore null value with keep the previous data
+     */
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     UserEntity updateDtoToEntity(AccountUpdateDto accountUpdateDto, @MappingTarget UserEntity account);
 }

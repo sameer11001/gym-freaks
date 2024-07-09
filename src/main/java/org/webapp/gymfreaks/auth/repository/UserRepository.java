@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 import org.webapp.gymfreaks.auth.model.UserEntity;
-import org.webapp.gymfreaks.core.repository.BaseRepostitory;
+import org.webapp.gymfreaks.core.repository.BaseRepository;
 
 @Repository
-public interface UserRepository extends BaseRepostitory<UserEntity, Long> {
+public interface UserRepository extends BaseRepository<UserEntity, Long> {
     Optional<UserEntity> findByUserEmail(String email);
 
     boolean existsByUserEmail(String email);

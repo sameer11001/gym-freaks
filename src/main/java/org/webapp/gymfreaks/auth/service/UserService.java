@@ -10,7 +10,7 @@ import org.webapp.gymfreaks.auth.mapper.UserMapper;
 import org.webapp.gymfreaks.auth.model.UserEntity;
 import org.webapp.gymfreaks.auth.repository.UserRepository;
 import org.webapp.gymfreaks.core.config.CustomLogger;
-import org.webapp.gymfreaks.core.error.NullItemException;
+import org.webapp.gymfreaks.core.error.EmptyItemsException;
 import org.webapp.gymfreaks.core.service.BaseService;
 
 @Service
@@ -50,8 +50,8 @@ public class UserService extends BaseService<UserEntity, Long> {
     @Override
     public List<UserEntity> insertAll(List<UserEntity> entities) {
         if (entities == null) {
-            CustomLogger.error(new NullItemException(), "Account list is null.");
-            throw new NullItemException();
+            CustomLogger.error(new EmptyItemsException(), "Account list is null.");
+            throw new EmptyItemsException();
         }
 
         return accountRepository.saveAll(entities);

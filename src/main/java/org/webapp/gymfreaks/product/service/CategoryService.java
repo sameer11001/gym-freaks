@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webapp.gymfreaks.core.config.CustomLogger;
+import org.webapp.gymfreaks.core.error.EmptyItemsException;
+import org.webapp.gymfreaks.product.error.CategoryNotFound;
 import org.webapp.gymfreaks.product.model.Category;
 import org.webapp.gymfreaks.product.repository.CategoryRepository;
 
@@ -21,7 +24,7 @@ public class CategoryService {
     public Category getCategoryByCategoryName(String categoryName) {
         Optional<Category> category = categoryRepository.findByCategoryName(categoryName);
         if (!category.isPresent()) {
-            throw new RuntimeException();
+            throw new CategoryNotFound();
         }
         return category.get();
     }
@@ -30,4 +33,11 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public List<Category> insertAll(List<Category> entities) {
+        if (entities.isEmpty()) {
+            CustomLogger.error(new EmptyItemsException(), "Account list is null.");
+            throw new EmptyItemsException();
+        }
+        return categoryRepository.saveAll(entities);
+    }
 }

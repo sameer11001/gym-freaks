@@ -5,6 +5,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.webapp.gymfreaks.core.model.BaseEntity;
 
 @NoRepositoryBean
-public interface BaseRepostitory<T extends BaseEntity, ID> extends JpaRepository<T, ID> {
+public interface BaseRepository<T extends BaseEntity, ID> extends JpaRepository<T, ID> {
 
 }

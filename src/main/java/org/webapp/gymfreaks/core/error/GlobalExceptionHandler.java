@@ -96,8 +96,8 @@ public class GlobalExceptionHandler {
 
     // Not Found
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NullItemException.class)
-    protected ResponseEntity<Object> handleNullItemExceptionHandler(final NullItemException ex) {
+    @ExceptionHandler(EmptyItemsException.class)
+    protected ResponseEntity<Object> handleNullItemExceptionHandler(final EmptyItemsException ex) {
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 404, errors);
