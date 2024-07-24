@@ -11,4 +11,6 @@ public interface UserRepository extends BaseRepository<UserEntity, Long> {
     Optional<UserEntity> findByUserEmail(String email);
 
     boolean existsByUserEmail(String email);
+
+    Long findUserIdbyUserEmail(String email);
 }

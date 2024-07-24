@@ -49,6 +49,10 @@ public class AuthService extends BaseService<UserEntity, Long> implements UserDe
         return accountRepository.findAll();
     }
 
+    public Long findUserIdbyUserEmail(String email) {
+        return accountRepository.findUserIdbyUserEmail(email);
+    }
+
     @Override
     public List<UserEntity> insertAll(List<UserEntity> entities) {
         if (entities == null) {

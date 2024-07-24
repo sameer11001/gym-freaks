@@ -55,18 +55,17 @@ public class AuthController {
     @Autowired
     UserMapper userMapper;
 
-    @PostMapping("/login")
     @Operation(summary = "Login API", description = "Logs in a user and generates a JWT token")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Login successful with JWT token"),
             @ApiResponse(responseCode = "400", description = "Invalid credentials")
     })
+    @PostMapping("/login")
     public CustomApiResponse<JWTResponseDto> login(@Valid @RequestBody final LoginRequestDto requestBody) {
 
         try {
             JWTResponseDto token;
-            CustomLogger.debug("Login request received with email " + requestBody.getEmail());
             token = loginService.login(requestBody);
             CustomLogger.debug("Token generated " + token);
             return CustomApiResponse.successOf(token, "Login successful", null);

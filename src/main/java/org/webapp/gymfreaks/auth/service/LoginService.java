@@ -39,7 +39,7 @@ public class LoginService {
 
                 // Security Best Practices
                 SecurityContextHolder.getContext().setAuthentication(authentication); // Optional based on framework
-
+                CustomLogger.debug("email " + authentication.getName());
                 // Refresh Token Generation
                 RefreshToken refreshToken = refreshTokenService.createRefreshToken(authentication.getName());
 

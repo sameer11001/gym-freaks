@@ -11,8 +11,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-        generate_statistics: true
-        format_sql: true
+        generate_statistics: false
+        format_sql: false
+        show_sql: false
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/gym_freaks
     username: tiger
@@ -25,6 +26,7 @@ jwt:
     time: 36000000
   refresher:
     time: "60*60*24*7 "
+
 logging:
   level:
     org:
@@ -39,6 +41,7 @@ logging:
       "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(18971){magenta}
       %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint}
       %m%n%wEx"
+
 springdoc:
   api-docs:
     path: /swagger-ui

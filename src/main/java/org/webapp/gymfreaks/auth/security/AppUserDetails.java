@@ -16,6 +16,7 @@ import lombok.Builder;
 @AllArgsConstructor
 public class AppUserDetails implements UserDetails {
 
+    private Long userId;
     private String userEmail;
     private String userPassword;
 
@@ -27,6 +28,7 @@ public class AppUserDetails implements UserDetails {
 
     public AppUserDetails(UserEntity account) {
 
+        this.userId = account.getUserId();
         this.userEmail = account.getUserEmail();
         this.userPassword = account.getUserPassword();
 
@@ -53,6 +55,10 @@ public class AppUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return userEmail;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class Product extends BaseEntity {
     private Boolean productLive;
 
     @NotBlank
-    @Column(name = "product_category", nullable = false)
+    @Column(name = "product_category", nullable = false) // there is a relationship between product and category
     private String productCategory;
 
 }

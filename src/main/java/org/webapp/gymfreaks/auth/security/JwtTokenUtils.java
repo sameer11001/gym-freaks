@@ -33,6 +33,15 @@ public class JwtTokenUtils {
         this.secretKey = secret;
     }
 
+    /**
+     * when genrate token send username and determine claim as map <String, T>
+     * send to create token method to build JWTS first of all set type of claims
+     * set the subject as username and set issuedAt as current time and expiration
+     * sign with the my secret key which store application yml
+     * 
+     * you can set claim as <String, Object>
+     * 
+     */
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
@@ -62,18 +71,15 @@ public class JwtTokenUtils {
         return claimsResolver.apply(claims);
     }
 
-    // for retrieving All the claims
     public Claims getAllClaimsFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(getsecrKey()).build().parseClaimsJws(token).getBody();
     }
 
-    // check if the token has expired
     public Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
-    // retrieve expiration date from jwt token
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }

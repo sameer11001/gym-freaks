@@ -80,7 +80,7 @@ public class ProductService {
 
     /**
      * @param productDto List of products to be inserted
-     * return List<ProductViewDto>
+     *                   return List<ProductViewDto>
      */
     public List<ProductViewDto> insertAll(List<ProductViewDto> productDto) {
         try {
@@ -102,11 +102,11 @@ public class ProductService {
     }
 
     /**
-     * @param  productDto productDto to be updated
-     * @param  id id of the product
+     * @param productDto productDto to be updated
+     * @param id         id of the product
      * @return ProductViewDto
      */
-    public ProductViewDto updateProduct(ProductViewDto productDto ,Long id) {
+    public ProductViewDto updateProduct(ProductViewDto productDto, Long id) {
         try {
             if (Boolean.FALSE.equals(productRepository.existsById(id))) {
                 CustomLogger.error("Product Not Found.");
@@ -122,7 +122,7 @@ public class ProductService {
 
     /**
      * @param id id of the product
-     * return void
+     *           return void
      */
     public void deleteProduct(Long id) {
         try {
@@ -137,4 +137,3 @@ public class ProductService {
         }
     }
 }
-
