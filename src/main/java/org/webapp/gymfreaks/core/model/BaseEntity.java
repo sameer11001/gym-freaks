@@ -18,6 +18,8 @@ import lombok.Setter;
 @MappedSuperclass
 public abstract class BaseEntity {
 
+
+
     @CreationTimestamp
     private LocalDate createdDate;
 

@@ -50,7 +50,7 @@ public class AuthService extends BaseService<UserEntity, Long> implements UserDe
     }
 
     public Long findUserIdbyUserEmail(String email) {
-        return accountRepository.findUserIdbyUserEmail(email);
+        return accountRepository.findUserIdByUserEmail(email);
     }
 
     @Override
